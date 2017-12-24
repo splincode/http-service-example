@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { HttpService } from "./http/http.service";
+import { LoggerModule } from "./logger/logger.module";
+import { LoggerLevel } from "./logger/logger.service";
+import { HttpClientModule } from "@angular/common/http";
 
 
 @NgModule({
@@ -10,9 +14,17 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
+    LoggerModule.forRoot({
+      logLevel: LoggerLevel.ALL,
+      showLevel: true,
+      colorConfig: {}
+    })
   ],
-  providers: [],
+  providers: [
+    HttpService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
